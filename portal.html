@@ -145,9 +145,15 @@
       const user = sessionStorage.getItem('loggedInUser');
       const table = document.getElementById('attendanceTable');
       const section = document.getElementById('attendanceSection');
-      var url = "https://docs.google.com/spreadsheets/d/1PEzGcibBLWCCPhyezJK3ricOhCwy8q2Qxzw55rrjjyk/edit?usp=sharing";
-    
-    window.open(url, "_blank");
+      const url = "https://docs.google.com/spreadsheets/d/1PEzGcibBLWCCPhyezJK3ricOhCwy8q2Qxzw55rrjjyk/edit?usp=sharing";
+
+  // Create a hidden link, set it to open in a new tab, and click it
+  const link = document.createElement('a');
+  link.href = url;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer'; // This prevents the new page from controlling the old one
+  link.click();
+      
       section.style.display = 'block';
       table.innerHTML = "<tr><td>Loading your records...</td></tr>";
 
