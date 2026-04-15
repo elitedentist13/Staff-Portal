@@ -145,7 +145,9 @@
       const user = sessionStorage.getItem('loggedInUser');
       const table = document.getElementById('attendanceTable');
       const section = document.getElementById('attendanceSection');
-      
+      var url = "https://docs.google.com/spreadsheets/d/1PEzGcibBLWCCPhyezJK3ricOhCwy8q2Qxzw55rrjjyk/edit?usp=sharing";
+    
+    window.open(url, "_blank");
       section.style.display = 'block';
       table.innerHTML = "<tr><td>Loading your records...</td></tr>";
 
