@@ -63,6 +63,9 @@
     if (!sessionStorage.getItem('loggedInUser')) {
         window.location.href = 'index.html';
     }
+    if (sessionStorage.getItem('loggedInUser') === "pt") {
+  document.getElementById('attendanceCard').style.display = 'none';
+}
   </script>
 
   <div class="header">
@@ -179,9 +182,7 @@
           table.innerHTML = "<tr><td style='color:red;'>Error loading data. Check script deployment settings.</td></tr>";
         });
     }
-  if (sessionStorage.getItem('loggedInUser') === "pt") {
-  document.getElementById('attendanceCard').style.display = 'none';
-}
+  
     function logout() {
       sessionStorage.removeItem('loggedInUser');
       window.location.href = 'index.html';
