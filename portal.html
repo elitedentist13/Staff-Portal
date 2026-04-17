@@ -183,11 +183,25 @@
           table.innerHTML = "<tr><td style='color:red;'>Error loading data. Check script deployment settings.</td></tr>";
         });
     }
-  
+  // 1. Display the logged-in name
+const currentUser = sessionStorage.getItem('loggedInUser');
+document.getElementById('userNameDisplay').innerText = currentUser;
+
+// 2. NEW: Hide the Attendance Card if the user is "pt"
+if (currentUser === "pt") {
+  // We find the card and set its display to 'none'
+  const attendanceCard = document.querySelector('.card[onclick="viewAttendance()"]');
+  if (attendanceCard) {
+    attendanceCard.style.display = 'none';
+  }
+}
     function logout() {
       sessionStorage.removeItem('loggedInUser');
       window.location.href = 'index.html';
     }
+     if (sessionStorage.getItem('loggedInUser') === "pt") {
+  document.getElementById('attendanceCard').style.display = 'none';
+}
   </script>
 </body>
 </html>
