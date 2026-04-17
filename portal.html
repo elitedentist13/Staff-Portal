@@ -183,17 +183,21 @@
           table.innerHTML = "<tr><td style='color:red;'>Error loading data. Check script deployment settings.</td></tr>";
         });
     }
-  // 1. Display the logged-in name
-const currentUser = sessionStorage.getItem('loggedInUser');
-document.getElementById('userNameDisplay').innerText = currentUser;
+// Get the logged-in username
+const userType = sessionStorage.getItem('loggedInUser');
+document.getElementById('userNameDisplay').innerText = userType;
 
-// 2. NEW: Hide the Attendance Card if the user is "pt"
-if (currentUser === "pt") {
-  // We find the card and set its display to 'none'
-  const attendanceCard = document.querySelector('.card[onclick="viewAttendance()"]');
-  if (attendanceCard) {
-    attendanceCard.style.display = 'none';
-  }
+// Check if the user is part-time
+if (userType === "pt") {
+  // Find all cards
+  const allCards = document.querySelectorAll('.card');
+  
+  // Loop through cards to find the one that mentions "AL Leaves"
+  allCards.forEach(card => {
+    if (card.innerText.includes("AL Leaves Record")) {
+      card.style.display = 'none'; // Completely hide the card
+    }
+  });
 }
     function logout() {
       sessionStorage.removeItem('loggedInUser');
