@@ -54,7 +54,24 @@
     }
     table { width: 100%; border-collapse: collapse; margin-top: 15px; }
     th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-    th { background-color: #f8f9fa; }
+    th { background-color: #f8f9fa; 
+       
+  .icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+  .red-dot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  background-color: #ff3b30; /* Bright Red */
+  border-radius: 50%;
+  border: 2px solid white;
+  display: none; /* Hidden by default */
+}
   </style>
 </head>
 <body>
@@ -76,10 +93,14 @@
 
   <div class="dashboard-grid">
     
+  
     <a href="https://docs.google.com/document/d/1xbmdO0FgX2YAufESFwcM3qumFEOTGjFjKAWz61o8HZs/edit?usp=sharing" target="_blank" class="card">
-      <div class="icon">📢</div>
-      <div class="title">Latest News</div>
-    </a>
+  <div class="icon-container">
+    <div class="icon">📢</div>
+    <div id="newsNotification" class="red-dot"></div>
+  </div>
+  <div class="title">Latest News</div>
+</a>
 
     <a href="https://docs.google.com/spreadsheets/d/1ecTa-FvsUK4bRZHLwvpDRAlXeajeddT64TR7YOs8TGA/edit?usp=sharing" target="_blank" class="card">
       <div class="icon">🦷</div>
@@ -203,7 +224,28 @@ if (userType === "pt") {
       sessionStorage.removeItem('loggedInUser');
       window.location.href = 'index.html';
     }
-     
+
+    function updateNewsBadge() {
+  fetch(`${WEB_APP_URL}?action=checkNewsStatus`)
+    .then(res => res.json())
+    .then(data => {
+      const lastUpdate = new Date(data.lastUpdated);
+      const now = new Date();
+      
+      // Calculate how many days ago it was updated
+      const diffInMs = now - lastUpdate;
+      const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+
+      // Show the red dot if the file was updated in the last 3 days
+      if (diffInDays <= 3) {
+        document.getElementById('newsNotification').style.display = 'block';
+      }
+    })
+    .catch(err => console.log("News badge error:", err));
+}
+
+// Call the function
+updateNewsBadge();
   </script>
 </body>
 </html>
