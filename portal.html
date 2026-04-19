@@ -54,24 +54,25 @@
     }
     table { width: 100%; border-collapse: collapse; margin-top: 15px; }
     th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-    th { background-color: #f8f9fa; 
-       }
-  .icon-container {
-  position: relative;
-  display: inline-block;
-}
+    th { background-color: #f8f9fa; }
 
-  .red-dot {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 12px;
-  height: 12px;
-  background-color: #ff3b30; /* Bright Red */
-  border-radius: 50%;
-  border: 2px solid white;
-  display: none; /* Hidden by default */
-}
+    .icon-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .red-dot {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 14px;
+      height: 14px;
+      background-color: #ff3b30;
+      border-radius: 50%;
+      border: 2px solid white;
+      display: none;
+      z-index: 99;
+    }
   </style>
 </head>
 <body>
